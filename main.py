@@ -1,5 +1,4 @@
 import os, time, numpy as np
-import sys
 import random as rd
 
 boardL1 =np.array([[" ", " "," "],
@@ -12,7 +11,7 @@ def draw(x,y,mark):
     while key:
         if boardL1[x][y]!= " ":
             if mark == 'x':
-                a,b=map(int, input("Chosen position has already been occuped, input again another position: ").split(","))
+                x,y=map(int, input("Chosen position has already been occuped, input again another position: ").split(","))
             else:
                 x,y= rd.randint(0,2),rd.randint(0,2)
         else:
@@ -28,13 +27,11 @@ def verify():
             i=0
             j+=1
     j=0
-    while j<2:
+    while i<=2:
         if boardL1[i][j]=="x" and boardL1[i][j+1]=="x" and boardL1[i][j+2]=="x": #error when j=1
+            print(i,j)
             return True
             break
-        if i==2:
-            j+=1
-            i=0
         i+=1
     if boardL1[0][0]=="x" and boardL1[1][1]=="x" and boardL1[2][2]=="x":
         return True
@@ -42,7 +39,7 @@ def verify():
         return True
 
 #to make the competitive game(npc and p2)
-os.system('cls')
+os.system('clear')
 while gamerun: #input the caractere, v it works
     print(boardL1)
     c='x'
@@ -51,7 +48,7 @@ while gamerun: #input the caractere, v it works
     if verify()== True:
         gamerun=False
     time.sleep(.7)
-    os.system('cls')
+    os.system('clear')
     c='o'
     draw(rd.randint(0,2),rd.randint(0,2),c)
 print(boardL1)
