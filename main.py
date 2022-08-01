@@ -28,10 +28,8 @@ def verify():
             j+=1
     j=0
     while i<=2:
-        if boardL1[i][j]=="x" and boardL1[i][j+1]=="x" and boardL1[i][j+2]=="x": #error when j=1
-            print(i,j)
+        if boardL1[i][j]=="x" and boardL1[i][j+1]=="x" and boardL1[i][j+2]=="x":
             return True
-            break
         i+=1
     if boardL1[0][0]=="x" and boardL1[1][1]=="x" and boardL1[2][2]=="x":
         return True
@@ -39,17 +37,23 @@ def verify():
         return True
 
 #to make the competitive game(npc and p2)
-os.system('clear')
-while gamerun: #input the caractere, v it works
+os.system('cls')
+while gamerun:
     print(boardL1)
     c='x'
     row,colum= map(int, input().split(","))
     draw(row,colum,c)
     if verify()== True:
         gamerun=False
+        print('you won')
+        print(boardL1)
+        break
     time.sleep(.7)
-    os.system('clear')
+    os.system('cls')
     c='o'
-    draw(rd.randint(0,2),rd.randint(0,2),c)
-print(boardL1)
-print('you won')
+    draw(rd.randint(0,row),rd.randint(0,colum),c)
+    if " " not in boardL1 and gamerun==True:
+        print("Player lose")
+        print(boardL1)
+        break
+
